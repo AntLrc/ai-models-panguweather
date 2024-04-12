@@ -1,0 +1,1 @@
+/work/FAC/FGSE/IDYST/tbeucler/downscaling/alecler1/ai-models-panguweather/ai_models_panguweather/model.py
