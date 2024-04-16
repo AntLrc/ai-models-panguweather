@@ -27,7 +27,7 @@ class PanguWeather(Model):
     # Input
     area = [90, 0, -90, 360]
     grid = [0.25, 0.25]
-    param_sfc = ["msl", "10u", "10v", "2t"]
+    param_sfc = ["msl", "10u", "10v", "2t"] #Checked with github page of PanguWeather
     param_level_pl = (
         ["z", "q", "t", "u", "v"],
         [1000, 925, 850, 700, 600, 500, 400, 300, 250, 200, 150, 100, 50],
@@ -173,7 +173,12 @@ class PanguWeather(Model):
                 saved_xarray = saved_xarray.rename({"level": "isobaricInhPa"})
                 start_date = self.all_fields[0].valid_time.values[0]
                 #/work/FAC/FGSE/IDYST/tbeucler/default/raw_data/ML_PREDICT/
+                """
                 name = "/work/FAC/FGSE/IDYST/tbeucler/default/raw_data/AI-milton/panguweather/" +\
+                    f"pangu_{np.datetime64(start_date, 'h')}_to_{np.datetime64(start_date + np.timedelta64(self.lead_time, 'h'), 'h')}"+\
+                    f"_ldt_{self.lead_time}.nc"
+                """
+                name = "/work/FAC/FGSE/IDYST/tbeucler/downscaling/alecler1/delete_me/panguweather/" +\
                     f"pangu_{np.datetime64(start_date, 'h')}_to_{np.datetime64(start_date + np.timedelta64(self.lead_time, 'h'), 'h')}"+\
                     f"_ldt_{self.lead_time}.nc"
                     
