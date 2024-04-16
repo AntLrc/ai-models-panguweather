@@ -108,7 +108,7 @@ class PanguWeather(Model):
             for i in range(self.lead_time // 6):
                 step = (i + 1) * 6
 
-                if (i + 1) % 4 == 0:
+                if (i + 1) % 4 == 0: 
                     output, output_surface = ort_session_24.run(
                         None,
                         {
