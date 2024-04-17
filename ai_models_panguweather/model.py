@@ -77,11 +77,15 @@ class PanguWeather(Model):
 
         pangu_weather_24 = os.path.join(self.assets, "pangu_weather_24.onnx")
         pangu_weather_6 = os.path.join(self.assets, "pangu_weather_6.onnx")
+        pangu_weather_3 = os.path.join(self.assets, "pangu_weather_3.onnx")
+        pangu_weather_1 = os.path.join(self.assets, "pangu_weather_1.onnx")
 
         # That will trigger a FileNotFoundError
 
         os.stat(pangu_weather_24)
         os.stat(pangu_weather_6)
+        os.stat(pangu_weather_3)
+        os.stat(pangu_weather_1)
 
         with self.timer(f"Loading {pangu_weather_24}"):
             ort_session_24 = ort.InferenceSession(
@@ -97,12 +101,35 @@ class PanguWeather(Model):
                 providers=self.providers,
             )
 
+        with self.timer(f"Loading {pangu_weather_3}"):
+            ort_session_6 = ort.InferenceSession(
+                pangu_weather_6,
+                sess_options=options,
+                providers=self.providers,
+            )
+
+        with self.timer(f"Loading {pangu_weather_1}"):
+            ort_session_6 = ort.InferenceSession(
+                pangu_weather_6,
+                sess_options=options,
+                providers=self.providers,
+            )
+
         input_24, input_surface_24 = input, input_surface
         
         if isinstance(self.all_fields, list):
             data_vars = {}
             surface_outputs = []
             pl_outputs = []
+            
+        if self.storm_efficiency:
+            lead_times = self.lead_times
+            calculated = {}
+            
+            # To be continued...
+            
+            
+            return
 
         with self.stepper(6) as stepper:
             for i in range(self.lead_time // 6):
